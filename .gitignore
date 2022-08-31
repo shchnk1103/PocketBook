@@ -1,2 +1,5 @@
 *.sqlite3
 migrations
+htmlcov
+.coverage
+.DS_Store

@@ -1,4 +1,3 @@
-from typing import List
 from django.utils import timezone
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
@@ -32,12 +31,6 @@ class AccountManager(BaseUserManager):
         if other_fields.get("is_superuser") is not True:
             raise ValueError("Superuser must have is_superuser=True.")
 
-        if other_fields.get('is_superuser') is not True:
-            raise ValueError(
-                'Superuser must be assigned to is_superuser=True.')
-        if other_fields.get('is_active') is not True:
-            raise ValueError('Superuser must be assigned to is_active=True.')
-
         return self.create_user(email, username, first_name, password, **other_fields)
 
 
@@ -54,8 +47,8 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
 
     objects = AccountManager()
 
-    USERNAME_FIELD: str = "email"
-    REQUIRED_FIELDS: List[str] = ['username', 'first_name']
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['username', 'first_name']
 
     def __str__(self) -> str:
         return self.username
