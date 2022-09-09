@@ -9,6 +9,7 @@ autopep8 = "*"
 [packages]
 django = "*"
 coverage = "*"
+pillow = "*"
 
 [requires]
 python_version = "3.1"

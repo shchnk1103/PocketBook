@@ -18,19 +18,23 @@ class UserTests(TestCase):
 
         with self.assertRaises(ValueError):
             db.objects.create_superuser(
-                email='test@super.com', username='test_user', first_name='', password='test_password', is_superuser=False)
+                email='test@super.com', username='test_user', first_name='',
+                password='test_password', is_superuser=False)
 
         with self.assertRaises(ValueError):
             db.objects.create_superuser(
-                email='test@super.com', username='test_user', first_name='', password='test_password', is_staff=False)
+                email='test@super.com', username='test_user', first_name='',
+                password='test_password', is_staff=False)
 
         with self.assertRaises(ValueError):
             db.objects.create_superuser(
-                email='test@super.com', username='test_user', first_name='', password='test_password', is_active=False)
+                email='test@super.com', username='test_user', first_name='',
+                password='test_password', is_active=False)
 
         with self.assertRaises(ValueError):
             db.objects.create_superuser(
-                email='', username='test_user', first_name='test_first_name', password='test_password', is_superuser=True)
+                email='', username='test_user', first_name='test_first_name',
+                password='test_password', is_superuser=True)
 
     def test_new_user(self):
         db = get_user_model()
