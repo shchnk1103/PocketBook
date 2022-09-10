@@ -27,7 +27,8 @@ class AdminConfig(UserAdmin):
             None,
             {
                 "classes": ("wide",),
-                "fields": ("email", "username", "first_name", "last_name", "password1", "password2", "is_active", "is_staff"),
+                "fields": ("email", "username", "first_name", "last_name", "password1", "password2",
+                           "is_active", "is_staff"),
             },
         ),
     )

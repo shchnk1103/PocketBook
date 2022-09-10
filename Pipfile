@@ -10,6 +10,9 @@ autopep8 = "*"
 django = "*"
 coverage = "*"
 pillow = "*"
+djangorestframework = "*"
+markdown = "*"
+django-filter = "*"
 
 [requires]
 python_version = "3.1"
