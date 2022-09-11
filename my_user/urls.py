@@ -1,5 +1,6 @@
 from django.urls import path, include
 from rest_framework import routers
+# from rest_framework.urlpatterns import format_suffix_patterns
 
 from my_user.views import UserViewSet
 
@@ -13,3 +14,5 @@ router.register(r'-api', UserViewSet)
 urlpatterns = [
     path('', include(router.urls)),
 ]
+
+# urlpatterns = format_suffix_patterns(urlpatterns)
