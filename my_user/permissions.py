@@ -14,7 +14,7 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
 
         # Write permissions are only allowed to the owner of the pocket_books.
         # If request.user is superuser, this user has all permissions.
-        if request.user.is_staff:
+        if request.user.is_superuser:
             return True
 
         # If request.user isn't superuser, this user can only check own permission.
