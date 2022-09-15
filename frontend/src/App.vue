@@ -1,17 +1,17 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
+  <img alt="Vue logo" src="./assets/logo.png" />
   <LoginPages />
 </template>
 
 <script>
-import LoginPages from "@/components/LoginPages";
+import LoginPages from "@/views/LoginPages";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    LoginPages
-  }
-}
+    LoginPages,
+  },
+};
 </script>
 
 <style>
