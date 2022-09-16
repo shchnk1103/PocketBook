@@ -10,8 +10,16 @@
     <div class="right">
       <div class="right-page">
         <img :src="InstagramImage" alt="" style="padding: 0px 70px 30px 70px" />
-        <input placeholder="Please enter your email." type="text" />
-        <input placeholder="Please enter your password" type="password" />
+        <input
+          v-model="user_name"
+          placeholder="Please enter your email."
+          type="text"
+        />
+        <input
+          v-model="user_password"
+          placeholder="Please enter your password"
+          type="password"
+        />
         <!-- Login Button -->
         <div
           style="
@@ -93,13 +101,22 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "LoginPages",
   data() {
     return {
       images: require("../assets/phone.png"),
       InstagramImage: require("../assets/instagram.png"),
+      user_name: "",
+      user_password: "",
     };
+  },
+  mounted() {
+    axios.get("http://localhost:8000/user-api/").then((res) => {
+      console.log(res.data);
+    });
   },
 };
 </script>
