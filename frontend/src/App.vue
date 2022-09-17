@@ -1,16 +1,13 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png" />
-  <LoginPages />
+
+  <router-view />
 </template>
 
 <script>
-import LoginPages from "@/views/LoginPages";
-
 export default {
   name: "App",
-  components: {
-    LoginPages,
-  },
+  components: {},
 };
 </script>
 

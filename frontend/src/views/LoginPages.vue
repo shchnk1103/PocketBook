@@ -11,7 +11,7 @@
       <div class="right-page">
         <img :src="InstagramImage" alt="" style="padding: 0px 70px 30px 70px" />
         <input
-          v-model="user_name"
+          v-model="user_email"
           placeholder="Please enter your email."
           type="text"
         />
@@ -22,6 +22,7 @@
         />
         <!-- Login Button -->
         <div
+          @click="login()"
           style="
             background-color: rgba(0, 149, 246, 0.3);
             text-align: center;
@@ -109,14 +110,35 @@ export default {
     return {
       images: require("../assets/phone.png"),
       InstagramImage: require("../assets/instagram.png"),
-      user_name: "",
+      user_email: "",
       user_password: "",
     };
   },
-  mounted() {
-    axios.get("http://localhost:8000/user-api/").then((res) => {
-      console.log(res.data);
-    });
+  methods: {
+    login() {
+      const that = this;
+      axios
+        .post("http://localhost:8000/api/token/", {
+          email: that.user_email,
+          password: that.user_password,
+        })
+        .then((response) => {
+          const storage = localStorage;
+          // 过期时间. Django设置了1分钟, 所以加上了60000ms.
+          // 之后要修改的地方
+          const expiredTime = Date.parse(response.headers.date) + 60000;
+          // Set localStorage
+          storage.setItem("access.pocketbook", response.data.access);
+          storage.setItem("refresh.pocketbook", response.data.refresh);
+          storage.setItem("expiredTime.pocketbook", expiredTime);
+          storage.setItem("useremail.pocketbook", that.user_email);
+          // 之后要修改的地方
+          that.$router.push({ name: "Test" });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
   },
 };
 </script>
