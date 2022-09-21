@@ -21,11 +21,18 @@
                 v-model="user_email"
                 type="text"
                 class="form-control"
-                id="exampleFormControlInput1"
+                id="email"
                 placeholder="Please enter your email."
+                v-bind:class="{ 'is-invalid': emailError }"
                 required
               />
-              <div class="invalid-feedback">Please enter a email.</div>
+              <div
+                class="invalid-feedback"
+                style="text-align: left"
+                v-if="errors[0]"
+              >
+                {{ errors[0].message }}
+              </div>
             </div>
             <!-- user_password -->
             <div class="btn-password">
@@ -33,28 +40,37 @@
                 v-model="user_password"
                 type="password"
                 class="form-control"
-                id="exampleFormControlInput1"
+                id="password"
                 placeholder="Please enter your password"
+                v-bind:class="{ 'is-invalid': passwordError }"
                 required
               />
-              <div class="invalid-feedback">Please enter a password.</div>
+              <div
+                class="invalid-feedback"
+                style="text-align: left"
+                v-if="errors[0]"
+              >
+                {{ errors[0].message }}
+              </div>
             </div>
           </form>
           <!-- Login Button -->
-          <div
+          <button
             @click="login()"
             style="
-              background-color: rgba(0, 149, 246, 0.3);
               text-align: center;
               color: white;
               margin-top: 10px;
               border-radius: 5px;
               padding: 10px;
+              border: 0px;
             "
+            :style="{ 'background-color': dynamicColor }"
             type="submit"
+            :disabled="disabledFlag"
           >
             Log In
-          </div>
+          </button>
           <!-- OR -->
           <div
             style="
@@ -142,6 +158,11 @@ export default {
       InstagramImage: require("../assets/instagram.png"),
       user_email: "",
       user_password: "",
+      emailError: false,
+      passwordError: false,
+      errors: [],
+      dynamicColor: "rgba(0, 149, 246, 0.3)",
+      disabledFlag: true,
     };
   },
   methods: {
@@ -169,6 +190,79 @@ export default {
           console.log(error);
         });
     },
+    validate() {
+      const that = this;
+      if (
+        // eslint-disable-next-line no-useless-escape
+        /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(that.user_email) &&
+        that.user_password.length > 0
+      ) {
+        that.login;
+      } else if (
+        // eslint-disable-next-line no-useless-escape
+        !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(that.user_email)
+      ) {
+        that.emailError = true;
+        that.errors.push({
+          message: "Email is invalid.",
+        });
+      } else if (that.user_password.length <= 0) {
+        that.passwordError = true;
+        that.errors.push({
+          message: "You must enter a password",
+        });
+      }
+    },
+  },
+  computed: {
+    userForm() {
+      const { user_email, user_password } = this;
+      return {
+        user_email,
+        user_password,
+      };
+    },
+  },
+  watch: {
+    user_email: {
+      handler(newValue) {
+        if (
+          // eslint-disable-next-line no-useless-escape
+          /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(newValue)
+        ) {
+          this.emailError = false;
+        } else {
+          this.emailError = true;
+          this.errors.push({
+            message: "Email is invalid.",
+          });
+        }
+      },
+    },
+    user_password: {
+      handler(newValue) {
+        if (newValue.length > 0) {
+          this.passwordError = false;
+        } else {
+          this.passwordError = true;
+          this.errors.push({
+            message: "You must enter a password.",
+          });
+        }
+      },
+    },
+    userForm: {
+      handler(newValue) {
+        console.log(newValue);
+        if (
+          newValue.user_email.length != 0 &&
+          newValue.user_password.length != 0
+        ) {
+          this.dynamicColor = "rgba(var(--d69,0,149,246),1)";
+          this.disabledFlag = false;
+        }
+      },
+    },
   },
 };
 </script>
@@ -180,7 +274,7 @@ export default {
 
 .btn-email,
 .btn-password {
-  width: 248px;
+  width: 100%;
   margin-top: 10px;
 }
 
@@ -190,6 +284,7 @@ input {
   border: 1px solid rgba(219, 219, 219);
   border-radius: 4px;
   text-align: left;
+  box-sizing: border-box;
   width: 100%;
   height: 100%;
 }
