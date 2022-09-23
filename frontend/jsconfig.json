@@ -14,6 +14,8 @@
       "dom",
       "dom.iterable",
       "scripthost"
-    ]
+    ],
+    // TypeScript intellisense is disabled on template.
+    "jsx": "preserve"
   }
 }
