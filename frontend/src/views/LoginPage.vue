@@ -17,7 +17,7 @@
 import LoginPageRight from "@/components/LoginPageRight.vue";
 
 export default {
-  name: "LoginPages",
+  name: "LoginPage",
   data() {
     return {
       images: require("../assets/phone.png"),

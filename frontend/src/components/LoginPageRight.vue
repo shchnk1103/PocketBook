@@ -86,6 +86,13 @@ export default {
   methods: {
     login() {
       const that = this;
+
+      // 获取headers中的时间
+      var res = new XMLHttpRequest();
+      res.open("GET", location, false);
+      res.send(null);
+      const date = res.getResponseHeader("Date");
+
       axios
         .post("http://localhost:8000/api/token/", {
           email: that.user_email,
@@ -94,15 +101,14 @@ export default {
         .then((response) => {
           const storage = localStorage;
           // 过期时间. Django设置了1分钟, 所以加上了60000ms.
-          // 之后要修改的地方
-          const expiredTime = Date.parse(response.headers.date) + 60000;
+          const expiredTime = Date.parse(date) + 86400000;
           // Set localStorage
           storage.setItem("access.pocketbook", response.data.access);
           storage.setItem("refresh.pocketbook", response.data.refresh);
           storage.setItem("expiredTime.pocketbook", expiredTime);
           storage.setItem("useremail.pocketbook", that.user_email);
-          // 之后要修改的地方
-          that.$router.push({ name: "Test" });
+
+          that.$router.push({ name: "Home" });
         })
         .catch((error) => {
           console.log(error);
@@ -171,7 +177,6 @@ export default {
     },
     userForm: {
       handler(newValue) {
-        console.log(newValue);
         if (
           newValue.user_email.length != 0 &&
           newValue.user_password.length != 0
