@@ -10,11 +10,14 @@
       <LoginPageRight />
       <div class="col-1"></div>
     </div>
+    <!-- Footer -->
+    <FooterBar />
   </div>
 </template>
 
 <script>
 import LoginPageRight from "@/components/LoginPageRight.vue";
+import FooterBar from "@/components/Footer.vue";
 
 export default {
   name: "LoginPage",
@@ -25,6 +28,7 @@ export default {
   },
   components: {
     LoginPageRight,
+    FooterBar,
   },
 };
 </script>
