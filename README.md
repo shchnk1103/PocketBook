@@ -12,13 +12,13 @@ ________________________________________________________________
 - Local Storage
 - Lightweight and compact
 
-## front-end framework
+## Front-end framework
 
 Vue 3.0
 
 ### What to do next day?
 
-- login page
+- Footer
 - logout page
 - admin page
 - Solve data interaction problems
