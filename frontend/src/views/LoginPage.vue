@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid text-center main-page">
+  <div class="container-fluid main-page">
     <div class="row justify-content-md-center">
       <div class="col-1"></div>
       <!-- Left -->
@@ -10,9 +10,9 @@
       <LoginPageRight />
       <div class="col-1"></div>
     </div>
-    <!-- Footer -->
-    <FooterBar />
   </div>
+  <!-- Footer -->
+  <FooterBar />
 </template>
 
 <script>
@@ -35,7 +35,9 @@ export default {
 
 <style scoped>
 .main-page {
-  padding-top: 10%;
+  margin-top: 32px;
+  margin-bottom: 20px;
+  padding-bottom: 32px;
 }
 
 .left {
