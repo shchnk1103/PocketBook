@@ -1,99 +1,31 @@
 <template>
-  <!-- 1 -->
-  <div class="footer">
-    <div class="detail-link">
-      <a href="#">
-        <div>Meta</div>
-      </a>
+  <div class="main-footer">
+    <!-- 1 -->
+    <div class="footer">
+      <div class="detail-link" v-for="item in footer_1" :key="item.msg">
+        <a href="#">
+          <div>{{ item.msg }}</div>
+        </a>
+      </div>
     </div>
-    <div class="detail-link">
-      <a href="#">
-        <div>About</div>
-      </a>
+    <!-- 2 -->
+    <div class="footer">
+      <div class="detail-link" v-for="item in footer_2" :key="item.msg">
+        <a href="#">
+          <div>{{ item.msg }}</div>
+        </a>
+      </div>
     </div>
-    <div class="detail-link">
-      <a href="#">
-        <div>Blog</div>
-      </a>
-    </div>
-    <div class="detail-link">
-      <a href="#">
-        <div>Jobs</div>
-      </a>
-    </div>
-    <div class="detail-link">
-      <a href="#">
-        <div>Privacy</div>
-      </a>
-    </div>
-    <div class="detail-link">
-      <a href="#">
-        <div>Terms</div>
-      </a>
-    </div>
-    <div class="detail-link">
-      <a href="#">
-        <div>Top Accounts</div>
-      </a>
-    </div>
-    <div class="detail-link">
-      <a href="#">
-        <div>Hashtags</div>
-      </a>
-    </div>
-    <div class="detail-link">
-      <a href="#">
-        <div>Locations</div>
-      </a>
-    </div>
-    <div class="detail-link">
-      <a href="#">
-        <div>Instagram Lite</div>
-      </a>
-    </div>
-    <div class="detail-link">
-      <a href="#">
-        <div>Contact Uploading & Non-Users</div>
-      </a>
-    </div>
-  </div>
-  <!-- 2 -->
-  <div class="footer">
-    <div class="detail-link">
-      <a href="#">
-        <div>Dance</div>
-      </a>
-    </div>
-    <div class="detail-link">
-      <a href="#">
-        <div>Food & Drink</div>
-      </a>
-    </div>
-    <div class="detail-link">
-      <a href="#">
-        <div>Home & Garden</div>
-      </a>
-    </div>
-    <div class="detail-link">
-      <a href="#">
-        <div>Music</div>
-      </a>
-    </div>
-    <div class="detail-link">
-      <a href="#">
-        <div>Visual Arts</div>
-      </a>
-    </div>
-  </div>
-  <!-- 3 -->
-  <div class="footer">
-    <div class="detail-link">
-      <a href="#">
-        <div>English</div>
-      </a>
-    </div>
-    <div class="detail-link">
-      <div class="copyright">© 2022 Instagram from Meta</div>
+    <!-- 3 -->
+    <div class="footer">
+      <div class="detail-link">
+        <a href="#">
+          <div>English</div>
+        </a>
+      </div>
+      <div class="detail-link">
+        <div class="copyright">© 2022 Instagram from Meta</div>
+      </div>
     </div>
   </div>
 </template>
@@ -101,10 +33,40 @@
 <script>
 export default {
   name: "FooterBar",
+  data() {
+    return {
+      footer_1: [
+        { msg: "Meta" },
+        { msg: "About" },
+        { msg: "Blog" },
+        { msg: "Jobs" },
+        { msg: "Terms" },
+        { msg: "Top Accounts" },
+        { msg: "Hashtags" },
+        { msg: "Locations" },
+        { msg: "Instagram Lite" },
+        { msg: "Contact Uploading & Non-Users" },
+      ],
+      footer_2: [
+        { msg: "Dance" },
+        { msg: "Food & Drink" },
+        { msg: "Home & Garden" },
+        { msg: "Music" },
+        { msg: "Visual Arts" },
+      ],
+    };
+  },
 };
 </script>
 
 <style scoped>
+.main-footer {
+  width: 100%;
+  height: 134px;
+  margin-top: 24px;
+  background-color: rgb(245, 245, 245);
+}
+
 .footer {
   display: flex;
   flex-direction: row;
