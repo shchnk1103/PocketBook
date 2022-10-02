@@ -16,6 +16,7 @@ django-filter = "*"
 pygments = "*"
 django-cors-headers = "*"
 djangorestframework-simplejwt = "*"
+drf-yasg = "*"
 
 [requires]
 python_version = "3.1"
