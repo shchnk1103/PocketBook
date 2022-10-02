@@ -20,3 +20,14 @@ class UserViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         password = make_password(self.request.data['password'])
         serializer.save(password=password)
+
+    def get_queryset(self):
+        if not self.request.user.pk:
+            queryset = []
+            return queryset
+        else:
+            queryset = self.queryset
+
+            if self.request.user.is_superuser:
+                return queryset
+            return queryset.filter(username=self.request.user)

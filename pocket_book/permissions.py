@@ -7,4 +7,7 @@ class IsOwner(permissions.BasePermission):
         if request.method in permissions.SAFE_METHODS:
             return True
 
-        return obj == request.user
+        if request.user.is_authenticated:
+            return True
+
+        return obj.author == request.user

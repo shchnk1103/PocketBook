@@ -8,4 +8,5 @@ from my_user.models import MyUser
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = MyUser
-        fields = ['url', 'username', 'email', 'first_name', 'last_name', 'about', 'password']
+        fields = ['url', 'pk', 'username', 'account_img', 'email', 'first_name', 'last_name', 'about', 'password',
+                  'is_superuser']
