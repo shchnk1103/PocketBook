@@ -1,7 +1,7 @@
 <template>
   <div class="main-page">
     <!-- Header -->
-    <NavBar style="z-index: 100" />
+    <NavBar />
     <!-- Main -->
     <MainPart />
   </div>

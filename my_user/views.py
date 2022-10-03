@@ -1,5 +1,5 @@
 from django.contrib.auth.hashers import make_password
-from rest_framework import viewsets, permissions
+from rest_framework import viewsets, permissions, filters
 
 from my_user.models import MyUser
 from my_user.permissions import IsOwnerOrReadOnly
@@ -14,6 +14,8 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     queryset = MyUser.objects.all().order_by('-start_date')
     serializer_class = UserSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['email', 'username']
 
     permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
 
@@ -22,12 +24,13 @@ class UserViewSet(viewsets.ModelViewSet):
         serializer.save(password=password)
 
     def get_queryset(self):
-        if not self.request.user.pk:
-            queryset = []
-            return queryset
-        else:
-            queryset = self.queryset
+        user = self.request.user
+        queryset = self.queryset
 
-            if self.request.user.is_superuser:
+        if not user.pk:
+            return queryset.none()
+        else:
+            if user.is_superuser:
                 return queryset
-            return queryset.filter(username=self.request.user)
+
+            return queryset.filter(username=user)

@@ -64,6 +64,7 @@ export default {
   width: 100%;
   height: 134px;
   margin-top: 24px;
+  padding-top: 24px;
   background-color: rgb(245, 245, 245);
 }
 
