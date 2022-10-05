@@ -77,14 +77,21 @@
       </div>
       <!-- Account-image -->
       <div class="nav-button">
-        <img :src="account_img" alt="" class="account-image" />
-        <div class="account-status-bar">
-          <img :src="account_img" alt="" class="info-account-image" />
-          <div class="info-username">{{ username }}</div>
-          <div class="info-email">{{ email }}</div>
-          <div class="info-detail">Info</div>
-          <div class="logout">Log out</div>
-        </div>
+        <img
+          :src="account_img"
+          alt=""
+          class="account-image"
+          @click="toggleShow"
+        />
+        <transition name="fade">
+          <div class="account-status-bar" v-show="isShow">
+            <img :src="account_img" alt="" class="info-account-image" />
+            <div class="info-username">{{ username }}</div>
+            <div class="info-email">{{ email }}</div>
+            <div class="info-detail">Info</div>
+            <div class="logout">Log out</div>
+          </div>
+        </transition>
       </div>
     </div>
   </div>
@@ -101,7 +108,7 @@ export default {
       username: "",
       account_img: "",
       email: "",
-      Show: false,
+      isShow: false,
     };
   },
   mounted() {
@@ -125,6 +132,11 @@ export default {
       .catch((error) => {
         console.log(error);
       });
+  },
+  methods: {
+    toggleShow() {
+      this.isShow = !this.isShow;
+    },
   },
 };
 </script>
@@ -171,7 +183,6 @@ export default {
   align-items: center;
 }
 
-.nav-button:hover .account-status-bar,
 .nav-button:hover .tooltip-home,
 .nav-button:hover .tooltip-write,
 .nav-button:hover .tooltip-add,
@@ -202,9 +213,6 @@ export default {
 
   padding: 3px 5px;
   font-size: 12px;
-  opacity: 0;
-  transition: opacity 0.15s;
-  pointer-events: none;
 }
 
 .nav-button .tooltip-home,
@@ -248,5 +256,15 @@ export default {
 .logout:hover {
   color: red;
   cursor: pointer;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
